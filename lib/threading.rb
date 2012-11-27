@@ -296,7 +296,7 @@ module MailHelper
   
   # Container for creation of parent/child relationship of messages 
   class Container
-    attr_accessor :parent, :children, :next, :message
+    attr_accessor :parent, :children, :next, :message, :model
   
     def initialize(message = nil)
       @parent = nil
@@ -354,7 +354,7 @@ module MailHelper
   #       and the complete message would allocate too much heap space 
   class Message
     attr_reader :subject, :message_id, :references
-    attr_accessor :from
+    attr_accessor :from, :model
   
     def initialize(subject, message_id, references)
       @subject = subject;
@@ -373,7 +373,7 @@ module MailHelper
   # Factory for creating messages. Ensures consistent data required
   # for threading algorithm.
   class MessageFactory
-  
+
     def self.create(subject, message_id, in_reply_to, references)    
       references ||= []
       in_reply_to ||= []
